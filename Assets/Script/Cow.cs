@@ -2,8 +2,90 @@ using UnityEngine;
 
 class Cow
 {
-    Cow()
-    {
 
+    private string name;
+    public string Name
+    {
+        get => name;
+        set => name = string.IsNullOrEmpty(value) ? "No Name" : value;
     }
+    private int hunger;
+    public int Hunger
+    {
+        get => hunger;
+        set
+        {
+            hunger = Mathf.Clamp(value, 0, 50);
+            Debug.Log($"{Name}'s hunger is now {hunger}.");
+        }
+    }
+    private int happiness;
+    public int Happiness
+    {
+        get => happiness;
+        set
+        {
+            happiness = Mathf.Clamp(value, 0, 50);
+            Debug.Log($"{Name}'s happiness is now {happiness}.");
+        }
+    }
+    private int milk;
+    public int Milk
+    {
+        get => milk;
+        set => milk = Mathf.Max(0, value);
+    }
+
+    // Feed, Moo
+    int hungerWhenFed = -20;
+
+    int happinessWhenMoo = 10;
+
+
+    public Cow(string newName, int newHunger, int newHappiness, int newMilk)
+    {
+        Name = newName;
+        Hunger = newHunger;
+        Happiness = newHappiness;
+        Milk = newMilk;
+    }
+
+    public void GetStats()
+    {
+        Debug.Log($"Cow Name: {Name}, Hunger: {Hunger}, Happiness: {Happiness}, Milk: {Milk}");
+    }
+
+    public void AdjustHunger(int amount)
+    {
+        Hunger += amount;
+    }
+
+    public void AdjustHappiness(int amount)
+    {
+        Happiness += amount;
+    }
+
+    public void MakeSound()
+    {
+        Debug.Log($"{Name}: Moo!");
+    }
+
+    public void Feed()
+    {
+        AdjustHunger(hungerWhenFed);
+        Debug.Log($"{Name} is fed. Hunger decreased by {-hungerWhenFed}.");
+    }
+
+    public void Moo()
+    {
+        AdjustHappiness(happinessWhenMoo);
+        Debug.Log($"{Name} moos. Happiness increased by {happinessWhenMoo}.");
+    }
+
+    /*public void Play()
+    {
+    }
+    public void ProduceMilk()
+    {
+    }*/
 }
