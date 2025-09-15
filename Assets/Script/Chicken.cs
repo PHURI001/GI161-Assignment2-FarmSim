@@ -33,13 +33,13 @@ class Chicken
         set => eggs = Mathf.Max(0, value);
     }
 
-    // Feed, Sleep
+    // Feed, Sleep values
     int hungerWhenFed = -20;
     
     int hugerWhenSlept = 10;
     int happinessWhenSlept = 10;
 
-
+    // Constructor
     public Chicken(string newName, int newHunger, int newHappiness, int newEggs)
     {
         Name = newName;
@@ -68,10 +68,10 @@ class Chicken
         Debug.Log($"{Name}: Cluck Cluck!");
     }
 
-    public void Feed()
+    public void Feed(string food)
     {
         AdjustHunger(hungerWhenFed);
-        Debug.Log($"{Name} is fed. Hunger decreased by { -hungerWhenFed }.");
+        Debug.Log($"{Name} is fed with {food}. Hunger decreased by {-hungerWhenFed}.");
     }
 
     public void Sleep()

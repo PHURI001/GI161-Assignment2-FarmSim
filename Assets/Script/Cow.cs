@@ -29,19 +29,19 @@ class Cow
             Debug.Log($"{Name}'s happiness is now {happiness}.");
         }
     }
-    private int milk;
-    public int Milk
+    private float milk;
+    public float Milk
     {
         get => milk;
         set => milk = Mathf.Max(0, value);
     }
 
-    // Feed, Moo
+    // Feed, Moo values
     int hungerWhenFed = -20;
 
     int happinessWhenMoo = 10;
 
-
+    // Constructor
     public Cow(string newName, int newHunger, int newHappiness, int newMilk)
     {
         Name = newName;
@@ -70,10 +70,10 @@ class Cow
         Debug.Log($"{Name}: Moo!");
     }
 
-    public void Feed()
+    public void Feed(string food)
     {
         AdjustHunger(hungerWhenFed);
-        Debug.Log($"{Name} is fed. Hunger decreased by {-hungerWhenFed}.");
+        Debug.Log($"{Name} is fed with {food}. Hunger decreased by {-hungerWhenFed}.");
     }
 
     public void Moo()
