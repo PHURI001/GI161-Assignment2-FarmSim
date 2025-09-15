@@ -53,12 +53,12 @@ class Chicken
         Debug.Log($"Chicken Name: {Name}, Hunger: {Hunger}, Happiness: {Happiness}, Eggs: {eggs}");
     }
 
-    public void AdjustHunger(int amount)
+    void AdjustHunger(int amount)
     {
         Hunger += amount;
     }
 
-    public void AdjustHappiness(int amount)
+    void AdjustHappiness(int amount)
     {
         Happiness += amount;
     }
