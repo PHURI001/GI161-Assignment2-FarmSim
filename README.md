@@ -24,7 +24,7 @@ The purpose of this project is to demonstrate OOP fundamentals in Unity, includi
 1. Clone the repository or download the project files.
 2. Open Unity Hub → Add Project → Select this project folder.
 3. Make sure to use Unity version `6000.0.56f1`.
-4. Open the main scene from `Assets/Scenes/` and press Play.
+4. Open the main scene from `Assets/Scenes/`
 
 ---
 
