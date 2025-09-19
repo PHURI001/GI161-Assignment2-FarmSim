@@ -1,90 +1,33 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-class Chicken
+public class Chicken : Animal
 {
-    private string name;
-    public string Name { 
-        get => name; 
-        set => name = string.IsNullOrEmpty(value) ? "No Name" : value; }
-    private int hunger;
-    public int Hunger
-    {
-        get => hunger;
-        set
-        {
-            hunger = Mathf.Clamp(value, 0, 50);
-            Debug.Log($"{Name}'s hunger is now {hunger}.");
-        }
-    }
-    private int happiness;
-    public int Happiness
-    {
-        get => happiness;
-        set
-        {
-            happiness = Mathf.Clamp(value, 0, 50);
-            Debug.Log($"{Name}'s happiness is now {happiness}.");
-        }
-    }
+    // Encapsulated field with property
     private int eggs;
-    public int Eggs
-    {
-        get => eggs;
-        set => eggs = Mathf.Max(0, value);
-    }
+    public int Eggs { get; set; }
 
-    // Feed, Sleep values
-    int hungerWhenFed = -20;
-    
-    int hugerWhenSlept = 10;
-    int happinessWhenSlept = 10;
+    int HappinessWhenSleep = 5;
+    int HungerWhenSleep = 3;
 
-    // Constructor
-    public Chicken(string newName, int newHunger, int newHappiness, int newEggs)
+    // Initialization method
+    public void Init(string newName, int newHunger, int newHappiness, int newEggs)
     {
-        Name = newName;
-        Hunger = newHunger;
-        Happiness = newHappiness;
+        base.Init(newName, newHunger, newHappiness);
         Eggs = newEggs;
     }
 
-    public void GetStats()
+    // Override MakeSound method
+    public override void MakeSound()
     {
-        Debug.Log($"Chicken Name: {Name}, Hunger: {Hunger}, Happiness: {Happiness}, Eggs: {eggs}");
+        Debug.Log($"{Name}: Cluck! Cluck!");
     }
 
-    void AdjustHunger(int amount)
-    {
-        Hunger += amount;
-    }
-
-    void AdjustHappiness(int amount)
-    {
-        Happiness += amount;
-    }
-
-    public void MakeSound()
-    {
-        Debug.Log($"{Name}: Cluck Cluck!");
-    }
-
-    public void Feed(string food)
-    {
-        AdjustHunger(hungerWhenFed);
-        Debug.Log($"{Name} is fed with {food}. Hunger decreased by {-hungerWhenFed}.");
-    }
-
+    // Method to simulate sleeping
     public void Sleep()
     {
-        AdjustHunger(hugerWhenSlept);
-        AdjustHappiness(happinessWhenSlept);
-        Debug.Log($"{Name} is sleeping. Hunger increased by {hugerWhenSlept}, Happiness increased by {happinessWhenSlept}.");
+        base.AdjustHunger(HungerWhenSleep);
+        base.AdjustHappiness(HappinessWhenSleep);
+        Debug.Log($"{Name} is sleeping. Hunger increased little and very happy.");
     }
-
-    /*public void Play()
-    {
-    }
-    public void LayEgg()
-    {
-    }*/
 }

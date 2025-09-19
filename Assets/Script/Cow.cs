@@ -1,34 +1,9 @@
 using UnityEngine;
-
-class Cow
+using System.Collections.Generic;
+public class Cow : Animal
 {
 
-    private string name;
-    public string Name
-    {
-        get => name;
-        set => name = string.IsNullOrEmpty(value) ? "No Name" : value;
-    }
-    private int hunger;
-    public int Hunger
-    {
-        get => hunger;
-        set
-        {
-            hunger = Mathf.Clamp(value, 0, 50);
-            Debug.Log($"{Name}'s hunger is now {hunger}.");
-        }
-    }
-    private int happiness;
-    public int Happiness
-    {
-        get => happiness;
-        set
-        {
-            happiness = Mathf.Clamp(value, 0, 50);
-            Debug.Log($"{Name}'s happiness is now {happiness}.");
-        }
-    }
+    // Encapsulated field with property
     private float milk;
     public float Milk
     {
@@ -36,56 +11,25 @@ class Cow
         set => milk = Mathf.Max(0, value);
     }
 
-    // Feed, Moo values
-    int hungerWhenFed = -20;
+    int happinessWhenMoo = 20;
 
-    int happinessWhenMoo = 10;
-
-    // Constructor
-    public Cow(string newName, int newHunger, int newHappiness, int newMilk)
+    // Initialization method
+    public void Init(string newName, int newHunger, int newHappiness, int newMilk)
     {
-        Name = newName;
-        Hunger = newHunger;
-        Happiness = newHappiness;
+        base.Init(newName, newHunger, newHappiness);
         Milk = newMilk;
     }
 
-    public void GetStats()
-    {
-        Debug.Log($"Cow Name: {Name}, Hunger: {Hunger}, Happiness: {Happiness}, Milk: {Milk}");
-    }
-
-    void AdjustHunger(int amount)
-    {
-        Hunger += amount;
-    }
-
-    void AdjustHappiness(int amount)
-    {
-        Happiness += amount;
-    }
-
-    public void MakeSound()
+    // Override MakeSound method
+    public override void MakeSound()
     {
         Debug.Log($"{Name}: Moo!");
     }
 
-    public void Feed(string food)
-    {
-        AdjustHunger(hungerWhenFed);
-        Debug.Log($"{Name} is fed with {food}. Hunger decreased by {-hungerWhenFed}.");
-    }
-
+    // Method to simulate mooing
     public void Moo()
     {
         AdjustHappiness(happinessWhenMoo);
-        Debug.Log($"{Name} moos. Happiness increased by {happinessWhenMoo}.");
+        Debug.Log($"{Name} says Muooooo! and feels happier.");
     }
-
-    /*public void Play()
-    {
-    }
-    public void ProduceMilk()
-    {
-    }*/
 }

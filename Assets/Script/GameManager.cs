@@ -1,33 +1,59 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // References to the current instances
+    Chicken currentChicken;
+    Cow currentCow;
+    Whale currentWhale;
+
+    // Reference to the base class
+    Animal currentAnimal;
+    public List<Animal> AnimalPrefab;
+    public List<Animal> animals = new List<Animal>();
+
     void Start()
     {
-        Chicken chicken = new Chicken("KFC", 20, 20, 0);
-        Cow cow = new Cow("Beef", 20, 20, 0);
+        // Instantiate animals from prefabs and initialize them
+        currentChicken = (Chicken)Instantiate(AnimalPrefab[0]);
+        currentChicken.Init("KFC", 10, 10, 0);
+        animals.Add(currentChicken);
 
-        string chickenFood = "corn";
-        string cowFood = "grass";
+        currentCow = (Cow)Instantiate(AnimalPrefab[1]);
+        currentCow.Init("Beef", 20, 20, 0);
+        animals.Add(currentCow);
 
-        Debug.Log("-------------- Chicken --------------");
+        currentWhale = (Whale)Instantiate(AnimalPrefab[2]);
+        currentWhale.Init("Big Blue", 15, 5);
+        animals.Add(currentWhale);
 
-        // Chicken actions
-        chicken.GetStats();
-        chicken.MakeSound();
-        chicken.Feed(chickenFood);
-        chicken.Sleep();
-        chicken.GetStats();
+        // Log initial
+        Debug.Log($"FarmSim Game! \nWe have {animals.Count} animals!");
+        Debug.Log("Animal List / Stats:");
 
-        Debug.Log("-------------- Cow --------------");
+        animals.ForEach(animal => animal.GetStats());
 
-        // Cow actions
-        cow.GetStats();
-        cow.MakeSound();
-        cow.Feed(cowFood);
-        cow.Moo();
-        cow.GetStats();
+        Debug.Log("-------------------------------------------------");
 
-        Debug.Log("-------------- End --------------");
+        animals.ForEach(animal => {
+            animal.MakeSound();
+            animal.Feed(2);
+        });
+
+        Debug.Log("-------------------------------------------------");
+
+        currentChicken.Feed("corn", 4);
+        currentChicken.Sleep();
+        currentChicken.GetStats();
+
+        currentCow.Feed("Hay", 6);
+        currentCow.Moo();
+
+        currentWhale.Feed("plankton", 999);
+
+        Debug.Log("-------------------------------------------------");
+
+        animals.ForEach(animal => animal.GetStats());
     }
 }
